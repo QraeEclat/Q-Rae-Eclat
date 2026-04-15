@@ -3,83 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q-Rae Eclat</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5e0e5;
-            margin: 0;
-            padding: 0;
-        }
-        .hero {
-            background-image: url('hero-image.jpg');
-            height: 50vh;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-        .product {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            width: 30%;
-            margin: 10px;
-        }
-        .clock {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .contact-form {
-            padding: 20px;
-        }
-    </style>
+    <title>Complete Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="hero">
-        <h1>Welcome to Q-Rae Eclat</h1>
-    </div>
-
-    <div class="clock" id="clock"></div>
-
-    <div class="products">
-        <div class="product"><h2>Product 1</h2><p>Description of product 1.</p></div>
-        <div class="product"><h2>Product 2</h2><p>Description of product 2.</p></div>
-        <div class="product"><h2>Product 3</h2><p>Description of product 3.</p></div>
-    </div>
-
-    <div class="contact-form">
-        <h2>Contact Us</h2>
-        <form>
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-
+    <header class="hero-section">
+        <img src="hero.jpg" alt="Hero Image">
+        <h1>Welcome to Our Store!</h1>
+    </header>
+    <main>
+        <section class="products">
+            <h2>Product Catalog</h2>
+            <ul>
+                <li><h3>Product 1</h3><p>Description of Product 1</p></li>
+                <li><h3>Product 2</h3><p>Description of Product 2</p></li>
+                <li><h3>Product 3</h3><p>Description of Product 3</p></li>
+                <li><h3>Product 4</h3><p>Description of Product 4</p></li>
+            </ul>
+        </section>
+        <section class="timezone-clock">
+            <h2>Multi-Timezone Clock</h2>
+            <div id="clocks">
+                <div>
+                    <h3>UTC</h3>
+                    <p id="utc-time"></p>
+                </div>
+                <div>
+                    <h3>New York</h3>
+                    <p id="ny-time"></p>
+                </div>
+                <div>
+                    <h3>London</h3>
+                    <p id="london-time"></p>
+                </div>
+            </div>
+        </section>
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
     <script>
-        function updateClock() {
+        function updateClocks() {
             const now = new Date();
-            document.getElementById('clock').innerText = now.toUTCString();
+            document.getElementById('utc-time').textContent = now.toUTCString();
+
+            // New York (UTC -4)
+            const nyTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            document.getElementById('ny-time').textContent = nyTime.toLocaleTimeString();
+
+            // London (UTC +1)
+            const londonTime = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+            document.getElementById('london-time').textContent = londonTime.toLocaleTimeString();
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClocks, 1000);
+        updateClocks();
     </script>
+    <link rel="stylesheet" href="styles.css">
 </body>
 </html>
